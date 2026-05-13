@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | Airsoft Store{% endblock %}
+{% block nav_products %}active{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Home</a></li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'product_list' %}?category={{ product.category.slug }}" class="text-decoration-none">
+          {{ product.category.name }}
+        </a>
+      </li>
+      <li class="breadcrumb-item active">{{ product.name }}</li>
+    </ol>
+  </nav>
+
+  <!-- Product Detail -->
+  <div class="row g-5 mb-5">
+
+    <!-- Image -->
+    <div class="col-lg-5">
+      <div class="card border-0 shadow-sm overflow-hidden">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}"
+             style="width:100%; max-height:420px; object-fit:cover;">
+        {% else %}
+        <div class="no-img" style="height:380px; font-size:5rem;">
+          <i class="bi bi-image"></i>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="col-lg-7">
+      <span class="badge text-bg-secondary mb-2">{{ product.category.name }}</span>
+      <h1 class="fw-bold mb-1">{{ product.name }}</h1>
+      <p class="text-muted mb-3">SKU: <code>{{ product.sku }}</code></p>
+
+      <!-- Stock Status -->
+      <div class="mb-3">
+        {% if product.stock_quantity == 0 %}
+        <span class="badge badge-outofstock fs-6 px-3 py-2">
+          <i class="bi bi-x-circle me-1"></i> Out of Stock
+        </span>
+        {% elif product.is_low_stock %}
+        <span class="badge badge-lowstock fs-6 px-3 py-2">
+          <i class="bi bi-exclamation-triangle me-1"></i> Low Stock — Only {{ product.stock_quantity }} left
+        </span>
+        {% else %}
+        <span class="badge badge-instock fs-6 px-3 py-2">
+          <i class="bi bi-check-circle me-1"></i> In Stock ({{ product.stock_quantity }} available)
+        </span>
+        {% endif %}
+      </div>
+
+      <!-- Price -->
+      <div class="display-5 fw-bold mb-4" style="color:#4a7c59;">${{ product.price }}</div>
+
+      <!-- Description -->
+      {% if product.description %}
+      <div class="mb-4">
+        <h6 class="fw-bold text-uppercase text-muted small mb-2">Description</h6>
+        <p class="text-dark">{{ product.description }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Add to Cart (placeholder) -->
+      <div class="d-flex gap-3 mb-4">
+        <button class="btn btn-olive btn-lg px-5" {% if product.stock_quantity == 0 %}disabled{% endif %}>
+          <i class="bi bi-cart-plus me-2"></i>
+          {% if product.stock_quantity == 0 %}Out of Stock{% else %}Add to Cart{% endif %}
+        </button>
+        <a href="{% url 'product_list' %}?category={{ product.category.slug }}"
+           class="btn btn-outline-secondary btn-lg">
+          <i class="bi bi-arrow-left me-1"></i> Back
+        </a>
+      </div>
+
+      <!-- Specs Table -->
+      <div class="card border-0 bg-light">
+        <div class="card-body">
+          <h6 class="fw-bold mb-3">Product Details</h6>
+          <table class="table table-sm table-borderless mb-0">
+            <tbody>
+              <tr>
+                <td class="text-muted pe-4" style="width:140px;">SKU</td>
+                <td class="fw-semibold"><code>{{ product.sku }}</code></td>
+              </tr>
+              <tr>
+                <td class="text-muted">Category</td>
+                <td class="fw-semibold">{{ product.category.name }}</td>
+              </tr>
+              <tr>
+                <td class="text-muted">Price</td>
+                <td class="fw-semibold">${{ product.price }}</td>
+              </tr>
+              <tr>
+                <td class="text-muted">Stock</td>
+                <td class="fw-semibold">{{ product.stock_quantity }} units</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  {% if related %}
+  <hr class="my-4">
+  <h3 class="fw-bold mb-4">More from {{ product.category.name }}</h3>
+  <div class="row g-4">
+    {% for item in related %}
+    <div class="col-6 col-md-3">
+      <div class="card product-card h-100 shadow-sm">
+        <a href="{% url 'product_detail' item.slug %}" class="text-decoration-none">
+          {% if item.image %}
+          <img src="{{ item.image.url }}" alt="{{ item.name }}" class="card-img-top">
+          {% else %}
+          <div class="no-img rounded-top"><i class="bi bi-image"></i></div>
+          {% endif %}
+        </a>
+        <div class="card-body">
+          <h6 class="card-title fw-semibold mb-1">
+            <a href="{% url 'product_detail' item.slug %}" class="text-dark text-decoration-none">
+              {{ item.name }}
+            </a>
+          </h6>
+          <div class="fw-bold" style="color:#4a7c59;">${{ item.price }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}
