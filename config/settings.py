@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 import dj_database_url
 from decouple import config, Csv
 
@@ -28,6 +29,11 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-g_#r_xu12#jz53m)q_=c0
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+
+# Automatically allow the Railway-assigned public domain
+railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if railway_domain:
+    ALLOWED_HOSTS.append(railway_domain)
 
 
 # Application definition
