@@ -1,6 +1,16 @@
+import os
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.db import connection
 from django.db.models import Count, Q
 from .models import Category, Product
+
+
+def db_check(request):
+    db_url = os.environ.get('DATABASE_URL', 'NOT SET')
+    engine = connection.settings_dict['ENGINE']
+    db_name = connection.settings_dict['NAME']
+    return HttpResponse(f'ENGINE: {engine}\nNAME: {db_name}\nDATABASE_URL set: {bool(os.environ.get("DATABASE_URL"))}\nURL prefix: {db_url[:40]}')
 
 
 def home(request):
