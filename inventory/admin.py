@@ -135,7 +135,9 @@ class ProductAdmin(admin.ModelAdmin):
     stock_badge.admin_order_field = 'stock_quantity'
 
     def inventory_value_list(self, obj):
-        return format_html('${:.2f}', obj.price * obj.stock_quantity)
+        if obj.price is None:
+            return '-'
+        return format_html('${:.2f}', obj.price * (obj.stock_quantity or 0))
     inventory_value_list.short_description = 'Stock Value'
 
     def thumbnail_preview(self, obj):
@@ -149,7 +151,9 @@ class ProductAdmin(admin.ModelAdmin):
     thumbnail_preview.short_description = 'Preview'
 
     def inventory_value_detail(self, obj):
-        return format_html('<b>${:.2f}</b>  ({} units x ${})', obj.price * obj.stock_quantity, obj.stock_quantity, obj.price)
+        if obj.price is None:
+            return '-'
+        return format_html('<b>${:.2f}</b>  ({} units x ${})', obj.price * (obj.stock_quantity or 0), obj.stock_quantity or 0, obj.price)
     inventory_value_detail.short_description = 'Total Inventory Value'
 
     @admin.action(description='Activate selected products')
@@ -234,6 +238,8 @@ class OrderAdmin(admin.ModelAdmin):
     item_count.short_description = 'Items'
 
     def total_display(self, obj):
+        if obj.total_price is None:
+            return '-'
         return format_html('<b>${:.2f}</b>', obj.total_price)
     total_display.short_description = 'Total'
     total_display.admin_order_field = 'total_price'
