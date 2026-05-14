@@ -7,10 +7,16 @@ from .models import Category, Product
 
 
 def db_check(request):
+    neon_url = os.environ.get('NEON_DB_URL', 'NOT SET')
     db_url = os.environ.get('DATABASE_URL', 'NOT SET')
     engine = connection.settings_dict['ENGINE']
     db_name = connection.settings_dict['NAME']
-    return HttpResponse(f'ENGINE: {engine}\nNAME: {db_name}\nDATABASE_URL set: {bool(os.environ.get("DATABASE_URL"))}\nURL prefix: {db_url[:40]}')
+    return HttpResponse(
+        f'ENGINE: {engine}\nNAME: {db_name}\n'
+        f'NEON_DB_URL set: {bool(os.environ.get("NEON_DB_URL"))}\n'
+        f'DATABASE_URL set: {bool(os.environ.get("DATABASE_URL"))}\n'
+        f'NEON prefix: {neon_url[:40]}'
+    )
 
 
 def home(request):
