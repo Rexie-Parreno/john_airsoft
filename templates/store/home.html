@@ -1,131 +1,118 @@
-{% extends "base.html" %}
-{% block title %}Airsoft Store — Home{% endblock %}
+﻿{% extends "base.html" %}
+{% block title %}Airsoft Store - Premium Airsoft Equipment{% endblock %}
 {% block nav_home %}active{% endblock %}
-
 {% block content %}
 
-<!-- Hero Section -->
-<section style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f3460 100%); min-height: 440px; display:flex; align-items:center;">
-  <div class="container py-5">
-    <div class="col-lg-6">
-      <span class="badge text-bg-success mb-3 px-3 py-2 fs-6">New Arrivals In Stock</span>
-      <h1 class="display-4 fw-bold text-white mb-3">
-        Gear Up for<br><span style="color:#7bbf8a;">Battle</span>
-      </h1>
-      <p class="lead text-light opacity-75 mb-4">
-        Premium airsoft rifles, pistols, tactical gear &amp; accessories. Free shipping on orders over $100.
-      </p>
-      <div class="d-flex gap-3 flex-wrap">
-        <a href="{% url 'product_list' %}" class="btn btn-olive btn-lg px-5">
-          Shop Now <i class="bi bi-arrow-right ms-1"></i>
-        </a>
-        <a href="{% url 'product_list' %}?category=rifles" class="btn btn-outline-light btn-lg px-4">
-          View Rifles
-        </a>
+<section style="background:linear-gradient(135deg,#0f172a 0%,#1a3a5c 60%,#0f3460 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?w=1400&q=60') center/cover no-repeat;opacity:.12;"></div>
+  <div class="container py-5 position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="d-inline-flex align-items-center gap-2 mb-4 px-3 py-2 rounded-pill" style="background:rgba(74,124,89,.25);border:1px solid rgba(74,124,89,.4);">
+          <span class="rounded-circle d-inline-block" style="width:8px;height:8px;background:#7bbf8a;"></span>
+          <span class="small fw-semibold text-white">New Arrivals In Stock</span>
+        </div>
+        <h1 class="display-3 fw-bold text-white mb-3 lh-sm">Gear Up for<br><span style="color:#7bbf8a;">Battle</span></h1>
+        <p class="fs-5 mb-4" style="color:#94a3b8;max-width:480px;">Premium airsoft rifles, pistols, tactical gear &amp; accessories. Trusted by players nationwide.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="{% url 'product_list' %}" class="btn btn-olive btn-lg px-5 py-3">Shop Now <i class="bi bi-arrow-right ms-2"></i></a>
+          <a href="{% url 'product_list' %}?category=rifles" class="btn btn-outline-light btn-lg px-4 py-3">View Rifles</a>
+        </div>
+        <div class="row mt-5 g-3">
+          <div class="col-4 text-center"><div class="fw-bold fs-3 text-white">500+</div><div class="small" style="color:#64748b;">Products</div></div>
+          <div class="col-4 text-center" style="border-left:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1);"><div class="fw-bold fs-3 text-white">10K+</div><div class="small" style="color:#64748b;">Happy Customers</div></div>
+          <div class="col-4 text-center"><div class="fw-bold fs-3 text-white">5 Stars</div><div class="small" style="color:#64748b;">Rated Store</div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Stats Bar -->
-<section class="bg-dark text-white py-3">
-  <div class="container">
-    <div class="row text-center g-2">
-      <div class="col-6 col-md-3 border-end border-secondary">
-        <i class="bi bi-truck text-success fs-5"></i>
-        <div class="small fw-semibold">Free Shipping $100+</div>
-      </div>
-      <div class="col-6 col-md-3 border-end border-secondary">
-        <i class="bi bi-shield-check text-success fs-5"></i>
-        <div class="small fw-semibold">Secure Payments</div>
-      </div>
-      <div class="col-6 col-md-3 border-end border-secondary">
-        <i class="bi bi-arrow-counterclockwise text-success fs-5"></i>
-        <div class="small fw-semibold">30-Day Returns</div>
-      </div>
-      <div class="col-6 col-md-3">
-        <i class="bi bi-headset text-success fs-5"></i>
-        <div class="small fw-semibold">24/7 Support</div>
-      </div>
+<section style="background:#1e293b;border-bottom:1px solid #334155;">
+  <div class="container py-3">
+    <div class="row text-center g-0">
+      <div class="col-6 col-md-3 py-2 border-end border-secondary"><i class="bi bi-truck fs-5 mb-1 d-block" style="color:#7bbf8a;"></i><div class="small fw-semibold text-white">Free Shipping $100+</div></div>
+      <div class="col-6 col-md-3 py-2 border-end border-secondary"><i class="bi bi-shield-check fs-5 mb-1 d-block" style="color:#7bbf8a;"></i><div class="small fw-semibold text-white">Secure Payments</div></div>
+      <div class="col-6 col-md-3 py-2 border-end border-secondary"><i class="bi bi-arrow-counterclockwise fs-5 mb-1 d-block" style="color:#7bbf8a;"></i><div class="small fw-semibold text-white">30-Day Returns</div></div>
+      <div class="col-6 col-md-3 py-2"><i class="bi bi-headset fs-5 mb-1 d-block" style="color:#7bbf8a;"></i><div class="small fw-semibold text-white">24/7 Support</div></div>
     </div>
   </div>
 </section>
 
-<!-- Categories -->
 <section class="py-5">
   <div class="container">
-    <h2 class="fw-bold mb-1">Shop by Category</h2>
-    <p class="text-muted mb-4">Browse our wide selection of airsoft products</p>
-    <div class="row g-3">
+    <div class="text-center mb-5">
+      <div class="section-label mb-2">Browse</div>
+      <h2 class="fw-bold mb-1">Shop by Category</h2>
+      <p class="text-muted">Find exactly what you need for your next game</p>
+    </div>
+    <div class="row g-3 justify-content-center">
       {% for cat in categories %}
       <div class="col-6 col-md-4 col-lg-2">
         <a href="{% url 'product_list' %}?category={{ cat.slug }}" class="text-decoration-none">
-          <div class="card product-card text-center p-3 h-100 shadow-sm">
-            <i class="bi bi-box-seam fs-1 mb-2" style="color:#4a7c59;"></i>
-            <div class="fw-semibold text-dark">{{ cat.name }}</div>
-            <div class="text-muted small">{{ cat.product_count }} item{{ cat.product_count|pluralize }}</div>
+          <div class="cat-card text-center p-4 h-100">
+            <i class="bi bi-box-seam fs-1 mb-2 d-block" style="color:#4a7c59;"></i>
+            <div class="fw-semibold text-dark small">{{ cat.name }}</div>
+            <div class="text-muted" style="font-size:.75rem;">{{ cat.product_count }} item{{ cat.product_count|pluralize }}</div>
           </div>
         </a>
       </div>
-      {% empty %}
-      <p class="text-muted">No categories found.</p>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- Featured Products -->
-<section class="py-5" style="background:#eee8dc;">
+<section class="py-5" style="background:#f1f5f9;">
   <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-end mb-5">
       <div>
+        <div class="section-label mb-2">Hand-Picked</div>
         <h2 class="fw-bold mb-1">Featured Products</h2>
-        <p class="text-muted mb-0">Our most popular items</p>
+        <p class="text-muted mb-0">Our most popular airsoft gear</p>
       </div>
-      <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">
-        View All <i class="bi bi-arrow-right ms-1"></i>
-      </a>
+      <a href="{% url 'product_list' %}" class="btn btn-outline-olive px-4">View All <i class="bi bi-arrow-right ms-1"></i></a>
     </div>
     <div class="row g-4">
       {% for product in featured_products %}
       <div class="col-6 col-md-4 col-lg-3">
-        <div class="card product-card h-100 shadow-sm">
-          <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
-            {% elif product.image_url %}
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
-            {% else %}
-            <div class="no-img rounded-top"><i class="bi bi-image"></i></div>
-            {% endif %}
+        <div class="card product-card h-100">
+          <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none position-relative d-block">
+            {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+            {% elif product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
+            {% else %}<div class="no-img"><i class="bi bi-image"></i></div>{% endif %}
+            {% if product.stock_quantity == 0 %}<span class="badge badge-outofstock position-absolute top-0 end-0 m-2">Out of Stock</span>
+            {% elif product.is_low_stock %}<span class="badge badge-lowstock position-absolute top-0 end-0 m-2">Low Stock</span>{% endif %}
           </a>
-          <div class="card-body d-flex flex-column">
-            <div class="small text-muted mb-1">{{ product.category.name }}</div>
-            <h6 class="card-title fw-semibold mb-1">
-              <a href="{% url 'product_detail' product.slug %}" class="text-dark text-decoration-none">
-                {{ product.name }}
-              </a>
-            </h6>
-            <div class="mt-auto pt-2 d-flex align-items-center justify-content-between">
-              <span class="fw-bold fs-5" style="color:#4a7c59;">${{ product.price }}</span>
-              {% if product.stock_quantity == 0 %}
-              <span class="badge badge-outofstock">Out of Stock</span>
-              {% elif product.is_low_stock %}
-              <span class="badge badge-lowstock">Low Stock</span>
-              {% else %}
-              <span class="badge badge-instock">In Stock</span>
-              {% endif %}
+          <div class="card-body d-flex flex-column p-3">
+            <div class="small mb-1 fw-semibold" style="color:#7bbf8a;">{{ product.category.name }}</div>
+            <h6 class="fw-bold mb-2"><a href="{% url 'product_detail' product.slug %}" class="text-dark text-decoration-none">{{ product.name }}</a></h6>
+            {% if product.description %}<p class="small text-muted mb-3 desc-clamp">{{ product.description }}</p>{% endif %}
+            <div class="mt-auto d-flex align-items-center justify-content-between">
+              <span class="fs-5 price-tag">${{ product.price }}</span>
+              <a href="{% url 'product_detail' product.slug %}" class="btn btn-olive btn-sm px-3">View</a>
             </div>
           </div>
         </div>
       </div>
       {% empty %}
-      <div class="col-12">
-        <div class="alert alert-info">
-          No products yet. Run <code>python manage.py seed_data</code> to add sample data.
-        </div>
-      </div>
+      <div class="col-12 text-center py-5"><i class="bi bi-box-seam fs-1 text-muted"></i><p class="text-muted mt-2">No products yet.</p></div>
       {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-label mb-2">Why Us</div>
+      <h2 class="fw-bold">Why Choose Airsoft Store</h2>
+    </div>
+    <div class="row g-4">
+      {% for icon,title,desc in "bi-award,Authentic Gear,100% genuine products from top brands worldwide|bi-lightning-charge,Fast Delivery,Same-day shipping on orders placed before 2pm|bi-headset,Expert Support,Our team of airsoft veterans is always ready to help|bi-shield-check,Safe & Secure,Encrypted checkout and secure payment processing" %}{% endfor %}
+      <div class="col-md-3 col-6 text-center"><div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#e8f5ee;"><i class="bi bi-award fs-3" style="color:#4a7c59;"></i></div><h6 class="fw-bold">Authentic Gear</h6><p class="small text-muted">100% genuine products from top brands worldwide</p></div>
+      <div class="col-md-3 col-6 text-center"><div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#e8f5ee;"><i class="bi bi-lightning-charge fs-3" style="color:#4a7c59;"></i></div><h6 class="fw-bold">Fast Delivery</h6><p class="small text-muted">Same-day shipping on orders placed before 2pm</p></div>
+      <div class="col-md-3 col-6 text-center"><div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#e8f5ee;"><i class="bi bi-headset fs-3" style="color:#4a7c59;"></i></div><h6 class="fw-bold">Expert Support</h6><p class="small text-muted">Our team of airsoft veterans is always ready to help</p></div>
+      <div class="col-md-3 col-6 text-center"><div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#e8f5ee;"><i class="bi bi-shield-check fs-3" style="color:#4a7c59;"></i></div><h6 class="fw-bold">Safe &amp; Secure</h6><p class="small text-muted">Encrypted checkout and secure payment processing</p></div>
     </div>
   </div>
 </section>

@@ -62,7 +62,7 @@ class StockMovementInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'thumbnail_list', 'name', 'sku', 'category',
-        'price_display', 'stock_badge', 'inventory_value_list', 'is_active', 'delete_link',
+        'price_display', 'stock_badge', 'inventory_value_list', 'is_active', 'edit_link', 'delete_link',
     )
     list_filter = ('category', 'is_active', StockLevelFilter)
     search_fields = ('name', 'sku', 'description')
@@ -159,10 +159,17 @@ class ProductAdmin(admin.ModelAdmin):
     def delete_link(self, obj):
         return format_html(
             '<a href="{}/delete/" style="color:#ef4444;font-weight:600;" '
-            'onclick="return confirm(\'Delete {}?\')">Delete</a>',
+            'onclick="return confirm(\'Delete {}?\')"><i class="fas fa-trash"></i> Delete</a>',
             obj.pk, obj.name,
         )
     delete_link.short_description = ''
+
+    def edit_link(self, obj):
+        return format_html(
+            '<a href="{}/change/" style="color:#3b82f6;font-weight:600;"><i class="fas fa-edit"></i> Edit</a>',
+            obj.pk,
+        )
+    edit_link.short_description = ''
 
     @admin.action(description='Activate selected products')
     def activate_products(self, request, queryset):
