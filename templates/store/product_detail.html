@@ -25,11 +25,11 @@
     <div class="col-lg-5">
       <div class="card border-0 shadow-sm overflow-hidden">
         {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}"
-             style="width:100%; max-height:420px; object-fit:cover;">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; max-height:420px; object-fit:cover;" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+        <div class="no-img d-none" style="height:380px; font-size:5rem;"><i class="bi bi-image"></i></div>
         {% elif product.image_url %}
-        <img src="{{ product.image_url }}" alt="{{ product.name }}"
-             style="width:100%; max-height:420px; object-fit:cover;">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width:100%; max-height:420px; object-fit:cover;" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+        <div class="no-img d-none" style="height:380px; font-size:5rem;"><i class="bi bi-image"></i></div>
         {% else %}
         <div class="no-img" style="height:380px; font-size:5rem;">
           <i class="bi bi-image"></i>
@@ -123,9 +123,11 @@
       <div class="card product-card h-100 shadow-sm">
         <a href="{% url 'product_detail' item.slug %}" class="text-decoration-none">
           {% if item.image %}
-          <img src="{{ item.image.url }}" alt="{{ item.name }}" class="card-img-top">
+          <img src="{{ item.image.url }}" alt="{{ item.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+          <div class="no-img rounded-top d-none"><i class="bi bi-image"></i></div>
           {% elif item.image_url %}
-          <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-img-top">
+          <img src="{{ item.image_url }}" alt="{{ item.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+          <div class="no-img rounded-top d-none"><i class="bi bi-image"></i></div>
           {% else %}
           <div class="no-img rounded-top"><i class="bi bi-image"></i></div>
           {% endif %}

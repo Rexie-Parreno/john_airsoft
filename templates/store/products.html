@@ -85,9 +85,11 @@
           <div class="card product-card h-100 shadow-sm">
             <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none position-relative">
               {% if product.image %}
-              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+              <div class="no-img rounded-top d-none"><i class="bi bi-image"></i></div>
               {% elif product.image_url %}
-              <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
+              <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+              <div class="no-img rounded-top d-none"><i class="bi bi-image"></i></div>
               {% else %}
               <div class="no-img rounded-top"><i class="bi bi-image"></i></div>
               {% endif %}

@@ -77,9 +77,15 @@
       <div class="col-6 col-md-4 col-lg-3">
         <div class="card product-card h-100">
           <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none position-relative d-block">
-            {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
-            {% elif product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
-            {% else %}<div class="no-img"><i class="bi bi-image"></i></div>{% endif %}
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+            <div class="no-img d-none"><i class="bi bi-image"></i></div>
+            {% elif product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top" onerror="this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none')">
+            <div class="no-img d-none"><i class="bi bi-image"></i></div>
+            {% else %}
+            <div class="no-img"><i class="bi bi-image"></i></div>
+            {% endif %}
             {% if product.stock_quantity == 0 %}<span class="badge badge-outofstock position-absolute top-0 end-0 m-2">Out of Stock</span>
             {% elif product.is_low_stock %}<span class="badge badge-lowstock position-absolute top-0 end-0 m-2">Low Stock</span>{% endif %}
           </a>
