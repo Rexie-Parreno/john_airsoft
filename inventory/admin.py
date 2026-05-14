@@ -137,7 +137,7 @@ class ProductAdmin(admin.ModelAdmin):
     def inventory_value_list(self, obj):
         if obj.price is None:
             return '-'
-        return format_html('${:.2f}', obj.price * (obj.stock_quantity or 0))
+        return format_html('<b>${}</b>', '{:.2f}'.format(obj.price * (obj.stock_quantity or 0)))
     inventory_value_list.short_description = 'Stock Value'
 
     def thumbnail_preview(self, obj):
@@ -153,7 +153,7 @@ class ProductAdmin(admin.ModelAdmin):
     def inventory_value_detail(self, obj):
         if obj.price is None:
             return '-'
-        return format_html('<b>${:.2f}</b>  ({} units x ${})', obj.price * (obj.stock_quantity or 0), obj.stock_quantity or 0, obj.price)
+        return format_html('<b>${}</b>  ({} units x ${})', '{:.2f}'.format(obj.price * (obj.stock_quantity or 0)), obj.stock_quantity or 0, obj.price)
     inventory_value_detail.short_description = 'Total Inventory Value'
 
     @admin.action(description='Activate selected products')
@@ -200,7 +200,7 @@ class OrderItemInline(admin.TabularInline):
 
     def subtotal_display(self, obj):
         if obj.pk:
-            return format_html('<b>${:.2f}</b>', obj.subtotal)
+            return format_html('<b>${}</b>', '{:.2f}'.format(obj.subtotal))
         return '-'
     subtotal_display.short_description = 'Subtotal'
 
@@ -240,7 +240,7 @@ class OrderAdmin(admin.ModelAdmin):
     def total_display(self, obj):
         if obj.total_price is None:
             return '-'
-        return format_html('<b>${:.2f}</b>', obj.total_price)
+        return format_html('<b>${}</b>', '{:.2f}'.format(obj.total_price))
     total_display.short_description = 'Total'
     total_display.admin_order_field = 'total_price'
 
