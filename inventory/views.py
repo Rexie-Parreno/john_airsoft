@@ -7,14 +7,12 @@ from .models import Category, Product
 
 
 def db_check(request):
-    # Show all env vars that might be a DB URL
-    relevant = {k: v[:30] for k, v in os.environ.items()
-                if any(x in k.upper() for x in ['DB', 'DATABASE', 'POSTGRES', 'PG', 'NEON', 'SQL'])}
+    all_vars = dict(os.environ)
     engine = connection.settings_dict['ENGINE']
     db_name = connection.settings_dict['NAME']
     return HttpResponse(
-        f'ENGINE: {engine}\nNAME: {db_name}\n\nDB-related env vars:\n' +
-        '\n'.join(f'{k}: {v}...' for k, v in relevant.items())
+        f'ENGINE: {engine}\nNAME: {db_name}\n\nALL ENV VARS:\n' +
+        '\n'.join(f'{k}: {str(v)[:50]}' for k, v in sorted(all_vars.items()))
     )
 
 
