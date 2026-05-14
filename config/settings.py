@@ -88,10 +88,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import sys
 _db_url = os.environ.get('DATABASE_URL')
+print(f"[STARTUP] DATABASE_URL present: {bool(_db_url)}", file=sys.stderr)
 if _db_url:
+    print(f"[STARTUP] Using PostgreSQL", file=sys.stderr)
     DATABASES = {'default': dj_database_url.parse(_db_url, conn_max_age=600)}
 else:
+    print(f"[STARTUP] Falling back to SQLite", file=sys.stderr)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
