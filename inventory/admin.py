@@ -62,7 +62,7 @@ class StockMovementInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'thumbnail_list', 'name', 'sku', 'category',
-        'price_display', 'stock_badge', 'inventory_value_list', 'is_active',
+        'price_display', 'stock_badge', 'inventory_value_list', 'is_active', 'delete_link',
     )
     list_filter = ('category', 'is_active', StockLevelFilter)
     search_fields = ('name', 'sku', 'description')
@@ -73,7 +73,7 @@ class ProductAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at', 'thumbnail_preview', 'inventory_value_detail')
     inlines = [StockMovementInline]
-    actions = ['activate_products', 'deactivate_products', 'export_products_csv']
+    actions = ['activate_products', 'deactivate_products', 'export_products_csv', 'delete_selected']
     fieldsets = (
         ('Basic Info', {
             'fields': ('name', 'slug', 'sku', 'category', 'description', 'is_active'),
@@ -155,6 +155,14 @@ class ProductAdmin(admin.ModelAdmin):
             return '-'
         return format_html('<b>${}</b>  ({} units x ${})', '{:.2f}'.format(obj.price * (obj.stock_quantity or 0)), obj.stock_quantity or 0, obj.price)
     inventory_value_detail.short_description = 'Total Inventory Value'
+
+    def delete_link(self, obj):
+        return format_html(
+            '<a href="{}/delete/" style="color:#ef4444;font-weight:600;" '
+            'onclick="return confirm(\'Delete {}?\')">Delete</a>',
+            obj.pk, obj.name,
+        )
+    delete_link.short_description = ''
 
     @admin.action(description='Activate selected products')
     def activate_products(self, request, queryset):
