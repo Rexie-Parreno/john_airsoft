@@ -93,6 +93,8 @@
           <a href="{% url 'product_detail' product.slug %}" class="text-decoration-none">
             {% if product.image %}
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+            {% elif product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
             {% else %}
             <div class="no-img rounded-top"><i class="bi bi-image"></i></div>
             {% endif %}
