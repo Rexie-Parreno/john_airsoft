@@ -1,19 +1,7 @@
 import os
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.db import connection
 from django.db.models import Count, Q
 from .models import Category, Product
-
-
-def db_check(request):
-    all_vars = dict(os.environ)
-    engine = connection.settings_dict['ENGINE']
-    db_name = connection.settings_dict['NAME']
-    return HttpResponse(
-        f'ENGINE: {engine}\nNAME: {db_name}\n\nALL ENV VARS:\n' +
-        '\n'.join(f'{k}: {str(v)[:50]}' for k, v in sorted(all_vars.items()))
-    )
 
 
 def home(request):
