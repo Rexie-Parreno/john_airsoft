@@ -25,6 +25,7 @@ class Product(models.Model):
     stock_quantity = models.PositiveIntegerField(default=0)
     low_stock_threshold = models.PositiveIntegerField(default=5, help_text="Alert when stock falls below this number")
     image = models.ImageField(upload_to="products/", blank=True, null=True)
+    image_url = models.URLField("Image URL", blank=True, help_text="Paste an external image URL (used when no file is uploaded)")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
